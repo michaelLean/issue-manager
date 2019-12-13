@@ -1,15 +1,15 @@
-import { Schema, model, Document } from 'mongoose';
+import * as mongoose from 'mongoose';
 
 export const api = 'users';
 
-export interface IUsers extends Document {
+export interface IUsers extends mongoose.Document {
     username: string;
     password: string;
     status: number;
     email: string;
 }
 
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true
@@ -21,7 +21,7 @@ const userSchema = new Schema({
     status: {
         type: Number,
         required: true,
-        enum: [0,1]
+        enum: [0, 1]
     },
     email: {
         type: String,
@@ -31,4 +31,4 @@ const userSchema = new Schema({
     timestamps: true
 })
 
-export const user = model<IUsers>(api, userSchema, api);
+export const user = mongoose.model<IUsers>(api, userSchema, api);
